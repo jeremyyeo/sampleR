@@ -14,6 +14,7 @@ shinyServer(function(input, output, session) {
   })
   
   output$testtable <- DT::renderDataTable({
-    DT::datatable(details)
+    DT::datatable(details, rownames = F, filter = 'top', escape = F)
   })
+  
 })

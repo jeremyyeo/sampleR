@@ -41,3 +41,14 @@ for (i in burgers) {
 details <- as.data.frame(details)
 colnames(details) <- names
 details$Description <- iconv(details$Description, from = "UTF-8", to = "LATIN1")
+details <- details[, -c(1, 7, 9, 18)]
+details$Price <- as.numeric(gsub("\\$", "", details$Price))
+details$Page <- paste0("<a href='", details$Page, "'>", "visawoap</a>")
+details$Maps <- paste0("<a href='", details$Maps, "'>", "Google Maps</a>")
+details$Address <- paste(details$`Address 1`, details$`Address 2`, details$`Address 3`, sep = ", ")
+details <- details[, -c(7, 8, 9)]
+details$Available <- factor(gsub("\nAvailable:", "", details$Available))
+details$Restaurant <- as.character(details$Restaurant)
+details$Name <- as.character(details$Name)
+details$Beer <- as.character(details$Beer)
+details$Category <- factor(gsub("\nCategory:", "", details$Category))
