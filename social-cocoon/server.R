@@ -86,5 +86,8 @@ shinyServer(function(input, output, session) {
       layout(barmode = "stack", legend = list(orientation = "h")) %>% 
       config(displayModeBar = F)
   })
-
+  
+  output$dataColSince <- renderText({
+    paste0("Data collected since ", min(data()$created_at), " UTC.")
+  })
 })
