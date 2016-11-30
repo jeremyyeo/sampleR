@@ -17,7 +17,6 @@ ReadLastLines <- function(x, n, ...) {
          sep = "\n",
          quiet = TRUE,
          ...)
-  
   while (TRUE) {
     tmp <- scan(con,
                 1,
@@ -41,11 +40,12 @@ negative.words <- tail(readLines("negative-words.txt"), -35)
 # system("Rscript listen.R", wait = F)
 shinyServer(function(input, output, session) {
   tweets.df <- reactiveFileReader(1000, session, filePath = "tweets.json", readFunc = parseTweets)
-  
+
   data <- reactive({
     # invalidateLater(10000)
-    # tweets.df           <- parseTweets(ReadLastLines("tweets.json", n = 100), verbose = F)
-    tweets.df           <- tweets.df()
+    tweets.df           <- parseTweets("tweets.json", verbose = F)
+    tweets.df           <- unlist(lapply(readTweets("tweets.json"), '[[', 'created_at'))
+    # tweets.df           <- tweets.df()
     tweets.df$text      <- paste0('<a href="https://twitter.com/', 
                                   tweets.df$screen_name, 
                                   '/status/',
@@ -66,9 +66,9 @@ shinyServer(function(input, output, session) {
     tweets.df
   })
   
-  output$tweetTable <- renderDataTable({
+  output$tweetTable <- DT::renderDataTable({
     
-    datatable(data()[nrow(data()):1, ], escape = F, rownames = F, filter = "top") %>%
+    datatable(data()[nrow(data()):1, ], escape = F, rownames = F, filter = "top", class = "compact hover") %>%
       formatDate('created_at', "toLocaleString") %>%
       formatStyle('company', 
                   color = "white", 
