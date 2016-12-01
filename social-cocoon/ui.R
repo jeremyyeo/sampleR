@@ -6,7 +6,7 @@ shinyUI(
   fluidPage(
     title = "Accounting Software Sentiment Analysis",
     
-    titlePanel("Accounting Software Twitter Sentiment Analysis"),
+    titlePanel("Accounting Software Sentiment Analysis"),
     
     p("Updates in real time. Note: sentiment analysis wonky at best."),
     

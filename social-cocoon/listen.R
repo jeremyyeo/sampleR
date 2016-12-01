@@ -10,7 +10,7 @@ negative.words <- tail(readLines("negative-words.txt"), -35)
 repeat {
   # listen to tweets and write to .json file.
   # get rid of file when it becomes too large.
-  # file.remove("tweets.json")
+  # file.remove("tweets.json")  # enable this on server.
   filterStream(
     file.name = "tweets.json",
     track     = c("@xero", "@myob", "@quickbooks", "@sage"),
@@ -28,6 +28,7 @@ repeat {
   }
   
   # try parsing new tweets.
+  # on error, read blank rds file.
   check.for.tweets <- tryCatch({
     parseTweets("tweets.json")
   }, error = function(e) {
