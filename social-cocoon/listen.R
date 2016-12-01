@@ -1,5 +1,5 @@
 require(streamR)
-
+require(sentR)
 
 load(".httr-oauth")  # load oauth file.
 
