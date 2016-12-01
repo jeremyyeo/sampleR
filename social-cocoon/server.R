@@ -92,7 +92,7 @@ shinyServer(function(input, output, session) {
                   color = "white",
                   backgroundColor = styleEqual(
                     c("Xero", "MYOB", "QuickBooks", "Sage"),
-                    c("#13B5EA", "#13B5EA", "#2CA01C", "#007F64")
+                    c("#13B5EA", "#5C247B", "#2CA01C", "#007F64")
                   ))
     
   })
