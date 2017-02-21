@@ -1,0 +1,41 @@
+---
+title: "Crosstalk Demo"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(shiny)
+library(crosstalk)
+library(plotly)
+df <- cbind.data.frame(make = gsub("^([[:alpha:]]*) .*$", "\\1", rownames(mtcars)), 
+                       mtcars)
+df <- SharedData$new(df)
+```
+
+Sidebar {.sidebar}
+=======================================================================
+```{r}
+filter_checkbox("cyl", "Cylinders", df, ~cyl, inline = T)
+filter_checkbox("gear", "Gears", df, ~gear, inline = T)
+filter_slider("hp", "Horsepower", df, ~hp, width = "100%")
+```
+
+Page 1
+=======================================================================
+### Chart A
+
+```{r}
+plot_ly(df, x = ~hp, y = ~mpg, color = ~make, width = "100%") %>%
+  config(displayBarMode = F, fillFrame = T)
+```
+
+### Chart B
+
+```{r}
+plot_ly(df, x = ~mpg, y = ~hp, color = ~make, width = "100%")
+```
+
