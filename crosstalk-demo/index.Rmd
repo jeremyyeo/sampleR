@@ -13,15 +13,16 @@ library(crosstalk)
 library(plotly)
 df <- cbind.data.frame(make = gsub("^([[:alpha:]]*) .*$", "\\1", rownames(mtcars)), 
                        mtcars)
-df <- SharedData$new(df)
+df <- SharedData$new(head(df, 10))
 ```
 
 Sidebar {.sidebar}
 =======================================================================
 ```{r}
-filter_checkbox("cyl", "Cylinders", df, ~cyl, inline = T)
-filter_checkbox("gear", "Gears", df, ~gear, inline = T)
-filter_slider("hp", "Horsepower", df, ~hp, width = "100%")
+# filter_checkbox("cyl", "Cylinders", df, ~cyl, inline = T)
+# filter_checkbox("gear", "Gears", df, ~gear, inline = T)
+# filter_slider("hp", "Horsepower", df, ~hp, width = "100%")
+filter_select("make", "Make", df, ~make)
 ```
 
 Page 1
