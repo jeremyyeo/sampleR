@@ -4,7 +4,7 @@ library(shiny)
 library(shinydashboard)
 
 ui <- dashboardPage(
-  skin = "red",
+  skin = "blue",
   dashboardHeader(),
   dashboardSidebar(
     disable = TRUE
