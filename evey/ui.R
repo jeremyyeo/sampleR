@@ -4,7 +4,7 @@ library(shiny)
 library(shinydashboard)
 
 ui <- dashboardPage(
-  skin = "blue",
+  skin = "red",
   dashboardHeader(),
   dashboardSidebar(
     disable = TRUE
@@ -13,6 +13,9 @@ ui <- dashboardPage(
     fluidRow(
       infoBoxOutput("nzTime"),
       infoBoxOutput("sgTime")
+    ),
+    fluidRow(
+      verbatimTextOutput("printleft")
     )
   )
 )
