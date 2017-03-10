@@ -11,8 +11,8 @@ ui <- dashboardPage(
     ),
   dashboardBody(
     fluidRow(
-      infoBoxOutput("nzTime"),
-      infoBoxOutput("sgTime")
+        infoBoxOutput("nzTime", width = 6),
+        infoBoxOutput("sgTime", width = 6)
     ),
     fluidRow(
       verbatimTextOutput("printleft")
