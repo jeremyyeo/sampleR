@@ -32,3 +32,6 @@ vignettes/*.pdf
 *.png
 *.csv
 .Rproj.user
+
+# Credentials
+**/.credentials
