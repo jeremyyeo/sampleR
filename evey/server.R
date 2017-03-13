@@ -3,6 +3,7 @@
 library(shiny)
 library(lubridate)
 library(plotly)
+library(DT)
 
 server <- function(input, output, session) {
   amberPalette <- c("#FFF8E1", "#FFECB3", "#FFE082", "#FFD54F", "#FFCA28", 
@@ -121,4 +122,81 @@ server <- function(input, output, session) {
     icon <- if(current.hour > 6 & current.hour < 21) {icon("sun-o")} else {icon("moon-o")}
     infoBox("Singapore", paste(dt), icon = icon, color = "red", fill = TRUE)
   })
+  
+  # Retrieve SG Holidays ####
+  holidaysNZ <- data.frame(
+    Holiday    = c(
+      "Good Friday",
+      "Easter Monday",
+      "ANZAC Day",
+      "Queen's Birthday",
+      "Labour Day",
+      "Christmas Day",
+      "Boxing Day"
+    ),
+    Date = c(
+      "2017-04-14",
+      "2017-04-17",
+      "2017-04-25",
+      "2017-06-05",
+      "2017-10-23",
+      "2017-12-25",
+      "2017-12-26"
+    ),
+    Country = c(rep("New Zealand", 7))
+  )
+  holidaysNZ$Date <- as.Date(holidaysNZ$Date)
+  
+  # Retrieve SG Holidays ####
+  holidaysSG <- data.frame(
+    Holiday    = c(
+      "Good Friday",
+      "Labour Day",
+      "Vesak Day",
+      "Hari Raya Puasa",
+      "National Day",
+      "Hari Raya Haji",
+      "Deepavali",
+      "Christmas Day"
+    ),
+    Date = c(
+      "2017-04-14",
+      "2017-05-01",
+      "2017-05-10",
+      "2017-06-25",
+      "2017-08-09",
+      "2017-09-01",
+      "2017-10-18",
+      "2017-12-25"
+    ),
+    Country = c(rep("Singapore", 8))
+  )
+  holidaysSG$Date <- as.Date(holidaysSG$Date)
+  
+  # Group Holidays ####
+  holidays <- rbind.data.frame(holidaysSG, holidaysNZ)
+  holidays$DaysLeft <- as.numeric(holidays$Date - Sys.Date())
+  
+  output$holidayTable <- 
+    DT::renderDataTable(
+      datatable(
+        holidays,
+        filter = "top",
+        class = "hover",
+        options  = list(pageLength = 5,
+                        lengthMenu = c(5, 10, 15, 20),
+                        order = list(3, 'asc')),
+        rownames = FALSE,
+        extensions = "Responsive"
+      ) %>%
+        formatDate("Date", "toLocaleDateString") %>%
+        formatStyle("Country", 
+                    fontWeight = 'bold',
+                    color = styleEqual(c("Singapore", "New Zealand"), c("#00a65a", "#dd4b39"))) %>%
+        formatStyle("DaysLeft",
+                    background = styleColorBar(c(0, holidays$DaysLeft), amberPalette[9]),
+                    backgroundSize = "100% 90%",
+                    backgroundRepeat = "no-repeat",
+                    backgroundPosition = "center")
+    )
 }

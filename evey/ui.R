@@ -3,6 +3,7 @@
 library(shiny)
 library(shinydashboard)
 library(plotly)
+library(DT)
 
 ui <- dashboardPage(
   skin = "red",
@@ -16,7 +17,7 @@ ui <- dashboardPage(
         infoBoxOutput("nzTime", width = 6)
     ),
     fluidRow(
-      box(width = 12, solidHeader = T, h5("Countdown to Sydney", align = "center"))
+      box(width = 12, solidHeader = T, h4("Countdown to Sydney :)", align = "center"))
     ),
     fluidRow(
       box(title = "Days Left", status = "danger",
@@ -41,7 +42,10 @@ ui <- dashboardPage(
       ) 
     ),
     fluidRow(
-      box(width = 12, solidHeader = T, h5("Weather Forecast", align = "center"))
+      box(title = "Holiday Calendar", status = "danger", 
+          width = 12, solidHeader = T, 
+          DT::dataTableOutput("holidayTable")
+      )
     )
   )
 )
