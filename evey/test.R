@@ -102,3 +102,25 @@ holidaysSG$Date <- as.Date(holidaysSG$Date)
 # Group Holidays ####
 holidays <- rbind.data.frame(holidaysSG, holidaysNZ)
 holidays$DaysLeft <- as.numeric(holidays$Date - Sys.Date())
+
+# Test Timing ####
+seconds <- as.numeric(
+  ymd_hms("2017-04-26 11:30:00", tz = "Australia/Sydney") -
+    with_tz(Sys.time(), tzone = "Australia/Sydney")
+) * 24 * 60 * 60
+
+plot_ly(x = "Days", y = time.remaining@day, type = "bar", name = "days", 
+        marker = list(line = list(color = "black", width = 1))) %>%
+  add_trace(x = "Hours", y = time.remaining@hour, name = "hours") %>%
+  add_trace(x = "Minutes", y = time.remaining@minute, name = "minutes") %>%
+  add_trace(x = "Seconds", y = time.remaining@.Data, name = "seconds") %>%
+  layout(xaxis = list(fixedrange = T),
+         yaxis = list(fixedrange = T),
+         showlegend = F,
+         annotations = list(x = c("Days", "Hours", "Minutes", "Seconds"),
+                            y = c(time.remaining@day, time.remaining@hour, time.remaining@minute, time.remaining@.Data),
+                            text = c(time.remaining@day, time.remaining@hour, time.remaining@minute, trunc(time.remaining@.Data)),
+                            yanchor = "bottom",
+                            showarrow = F,
+                            font = list(size = 15))) %>%
+  config(displayModeBar = F, staticPlot = T)
