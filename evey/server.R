@@ -42,8 +42,8 @@ server <- function(input, output, session) {
     invalidateLater(1000, session)
     seconds <- 
       as.numeric(
-        ymd_hms("2017-04-26 11:30:00", tz = "Australia/Sydney") - 
-          with_tz(Sys.time(), tzone = "Australia/Sydney")
+        ymd_hms("2017-07-29 14:45:00", tz = "Pacific/Auckland") - 
+          with_tz(Sys.time(), tzone = "Pacific/Auckland")
       ) * 24 * 60 * 60
     seconds_to_period(seconds)
     })
@@ -204,6 +204,7 @@ server <- function(input, output, session) {
   # Group Holidays ####
   holidays <- rbind.data.frame(holidaysSG, holidaysNZ)
   holidays$DaysLeft <- as.numeric(holidays$Date - Sys.Date())
+  holidays <- holidays[holidays$DaysLeft >= 0, ]
   
   output$holidayTable <- 
     DT::renderDataTable(
@@ -220,7 +221,7 @@ server <- function(input, output, session) {
         formatDate("Date", "toLocaleDateString") %>%
         formatStyle("Country", 
                     fontWeight = 'bold',
-                    color = styleEqual(c("Singapore", "New Zealand"), c("#00a65a", "#dd4b39"))) %>%
+                    color = styleEqual(c("New Zealand", "Singapore"), c("#00a65a", "#dd4b39"))) %>%
         formatStyle("DaysLeft",
                     background = styleColorBar(c(0, holidays$DaysLeft), amberPalette[9]),
                     backgroundSize = "100% 90%",

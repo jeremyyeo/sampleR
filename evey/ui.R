@@ -17,7 +17,7 @@ ui <- dashboardPage(
         infoBoxOutput("nzTime", width = 6)
     ),
     fluidRow(
-      box(title = "Countdown to Sydney", status = "danger",
+      box(title = "Countdown to Tai Tai Life", status = "danger",
           width = 12, solidHeader = T, style = "padding:0px;",
           plotlyOutput("plottimeremaining")
       )
