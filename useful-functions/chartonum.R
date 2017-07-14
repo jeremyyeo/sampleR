@@ -13,8 +13,7 @@ names(small) <-
     "sixteen", "seventeen", "eighteen", "nineteen", "twenty",
     "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety")
 magnitude <-
-  c(100,
-    1000,
+  c(1000,
     1000000,
     1000000000,
     1000000000000,
@@ -26,8 +25,7 @@ magnitude <-
     1000000000000000000000000000000,
     1000000000000000000000000000000000)
 names(magnitude) <-
-  c("hundred",
-    "thousand",
+  c("thousand",
     "million",
     "billion",
     "trillion",
@@ -48,6 +46,8 @@ chartonum <- function(x) {
     x <- as.numeric(small[match(i, names(small))])
     if (!is.na(x)) {
       g <- g + x
+    } else if (i == "hundred" & g != 0) {
+      g <- g * 100
     } else {
       x <- as.numeric(magnitude[match(i, names(magnitude))])
       if (!is.na(x)) {
