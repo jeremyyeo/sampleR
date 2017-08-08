@@ -16,7 +16,7 @@ shinyUI(
     
     textOutput("dataColSince"),
     
-    fluidRow(column(12, plotlyOutput("tweetPlot"))),
+    fluidRow(column(12, plotlyOutput("tweetPlot", height = "50%"))),
     
     fluidRow(column(12, DT::dataTableOutput("tweetTable")))
   )

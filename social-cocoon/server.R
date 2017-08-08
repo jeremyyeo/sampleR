@@ -76,6 +76,7 @@ shinyServer(function(input, output, session) {
     } else {
       tweets.df <- old.tweets.df()
     }
+    # tweets.df[tweets.df$company == "Xero", ]
     tweets.df
   })
   
@@ -104,12 +105,12 @@ shinyServer(function(input, output, session) {
       dplyr::group_by(company) %>%
       dplyr::mutate(Perc = n / sum(n)) %>%
       plot_ly(
-        x = ~ company,
-        y = ~ Perc,
+        x = ~ Perc,
+        y = ~ company,
         color = ~ sentiment,
         type = "bar"
       ) %>%
-      layout(barmode = "stack", legend = list(orientation = "h")) %>%
+      layout(barmode = "stack", legend = list(x = 0, y = 100, orientation = "h")) %>%
       config(displayModeBar = F)
   })
   
