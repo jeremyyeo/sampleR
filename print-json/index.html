@@ -9,7 +9,7 @@
     <div class="mypanel"></div>
 
     <script>
-    $.getJSON('http://jeremyyeo.github.io/sampleR/print-json/list.json', function(process) {
+    $.getJSON('https://jeremyyeo.github.io/sampleR/print-json/list.json', function(process) {
         $.each(process, function(index, value){
             $.getJSON(value, function(data){
                 var text = `<b>Name:</b> ${data.name}<br>
