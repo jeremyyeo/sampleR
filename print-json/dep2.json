@@ -1,0 +1,7 @@
+{
+    "name": "process2",
+    "dependencies": [
+        "alice",
+        2
+    ]
+}
