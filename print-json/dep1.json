@@ -1,8 +1,8 @@
 {
-    "name": "process1",
-    "dependencies": [
-        "one",
-        2,
-        "https://google.com"
+    "name": "Alice",
+    "items": [
+        "apple",
+        "orange",
+        "watermelon"
     ]
 }

@@ -12,10 +12,10 @@
     $.getJSON('http://jeremyyeo.github.io/sampleR/print-json/list.json', function(process) {
         $.each(process, function(index, value){
             $.getJSON(value, function(data){
-                var text = `<b>Process:</b> ${data.name}<br>
-                            <b>Dependencies:</b> ` + 
-                            data.dependencies.sort().join(', ') +
-                            `<br><br>`;
+                var text = `<b>Name:</b> ${data.name}<br>
+                            <b>List:</b> <code>` + 
+                            data.items.sort().join(', ') +
+                            `</code><br><br>`;
                 $(".mypanel").append(text)    
             });
         }); 
