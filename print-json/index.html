@@ -18,7 +18,7 @@
             $.getJSON(value, function(data){
                 
                 var text = `<b>Process:</b> ${data.name}<br>
-                            <b>Dependencies:</b>` + 
+                            <b>Dependencies:</b> ` + 
                             data.dependencies.sort().join(', ') +
                             `<br><br>`;
                 $(".mypanel").append(text)    
