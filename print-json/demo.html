@@ -9,7 +9,7 @@
     <div class="mypanel"></div>
 
     <script>
-    $.getJSON('https://raw.githubusercontent.com/jeremyyeo/sampleR/master/print-json/dep.json?callback=?', function(data) {
+    $.getJSON('http://jeremyyeo.github.io/sampleR/print-json/dep.json', function(data) {
 
         var text = `${data.print}` 
         $(".mypanel").html(text);
