@@ -11,11 +11,16 @@
     <script>
     $.getJSON('http://jeremyyeo.github.io/sampleR/print-json/list.json', function(data) {
 
-        var text = data
+        var process = data
         
-        $.each(text, function(index, value){
+        $.each(process, function(index, value){
             
-            console.log(value); 
+            $.getJSON(value, function(data){
+                
+                var text = `Process Name: ${data.name}<br>`
+                $(".mypanel").html(text)    
+
+            });
 
         }); 
         // $(".mypanel").html(text);
