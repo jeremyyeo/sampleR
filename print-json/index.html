@@ -12,7 +12,11 @@
     $.getJSON('http://jeremyyeo.github.io/sampleR/print-json/list.json', function(data) {
 
         var text = data 
-        $(".mypanel").html(text);
+        // $(".mypanel").html(text);
+    });
+
+    $.each(text, function(index, value){
+       alert(value); 
     });
     </script>
     
