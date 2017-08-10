@@ -1,35 +1,21 @@
-<html>
-   <head>
-      <title>JSON example</title>
-		
-      <script language = "javascript" >
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>JavaScript - read JSON from URL</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
 
-         var request = new XMLHttpRequest();
-         request.open("GET", "../../list.json", false);
-         request.send(null);
-         var my_JSON_object = JSON.parse(request.responseText);
-         alert(my_JSON_object.result[0]);
+<body>
+    <div class="mypanel"></div>
 
-         var object1 = { "language" : "Java", "author"  : "herbert schildt" };
-         document.write("<h1>JSON with JavaScript example</h1>");
-         document.write("<br>");
-         document.write("<h3>Language = " + object1.language+"</h3>");  
-         document.write("<h3>Author = " + object1.author+"</h3>");   
+    <script>
+    $.getJSON('http://jeremyyeo.github.io/sampleR/print-json/dep.json', function(data) {
 
-         var object2 = { "language" : "C++", "author"  : "E-Balagurusamy" };
-         document.write("<br>");
-         document.write("<h3>Language = " + object2.language+"</h3>");  
-         document.write("<h3>Author = " + object2.author+"</h3>");   
-  
-         document.write("<hr />");
-         document.write(object2.language + " programming language can be studied " + "from book written by " + object2.author);
-         document.write("<hr />");
-  
-      </script>
-		
-   </head>
-	
-   <body>
-   </body>
-	
+        var text = `Process Name: ${data.name}<br>
+                    Dependencies: ${data.dependencies}`
+        $(".mypanel").html(text);
+    });
+    </script>
+    
+</body>
 </html>

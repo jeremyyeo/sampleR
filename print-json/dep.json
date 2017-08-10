@@ -1,3 +1,7 @@
 {
-    "print": "thing"
+    "name": "print-json",
+    "dependencies": [
+        "one",
+        2
+    ]
 }
