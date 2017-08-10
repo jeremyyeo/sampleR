@@ -1,7 +1,3 @@
 {
-    "print-json": [
-        "one", 
-        2,
-        "https://google.com"
-    ]
+    "print": "thing"
 }
