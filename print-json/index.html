@@ -18,15 +18,15 @@
             $.getJSON(value, function(data){
                 
                 var text = `<b>Process:</b> ${data.name}<br>
-                            <b>Dependencies:</b>:` + 
-                            data.dependencies.join(',') +
+                            <b>Dependencies:</b>` + 
+                            data.dependencies.sort().join(', ') +
                             `<br><br>`;
                 $(".mypanel").append(text)    
 
             });
 
         }); 
-        // $(".mypanel").html(text);
+
     });
 
 
