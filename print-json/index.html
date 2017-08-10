@@ -9,27 +9,17 @@
     <div class="mypanel"></div>
 
     <script>
-    $.getJSON('http://jeremyyeo.github.io/sampleR/print-json/list.json', function(data) {
-
-        var process = data
-        
+    $.getJSON('http://jeremyyeo.github.io/sampleR/print-json/list.json', function(process) {
         $.each(process, function(index, value){
-            
             $.getJSON(value, function(data){
-                
                 var text = `<b>Process:</b> ${data.name}<br>
                             <b>Dependencies:</b> ` + 
                             data.dependencies.sort().join(', ') +
                             `<br><br>`;
                 $(".mypanel").append(text)    
-
             });
-
         }); 
-
     });
-
-
     </script>
     
 </body>
