@@ -105,8 +105,8 @@ shinyServer(function(input, output, session) {
       dplyr::group_by(company) %>%
       dplyr::mutate(Perc = n / sum(n)) %>%
       plot_ly(
-        x = ~ Perc,
-        y = ~ company,
+        x = ~ company,
+        y = ~ Perc,
         color = ~ sentiment,
         type = "bar"
       ) %>%

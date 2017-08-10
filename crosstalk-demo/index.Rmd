@@ -19,10 +19,10 @@ df <- SharedData$new(head(df, 10))
 Sidebar {.sidebar}
 =======================================================================
 ```{r}
-# filter_checkbox("cyl", "Cylinders", df, ~cyl, inline = T)
+filter_checkbox("cyl", "Cylinders", df, ~cyl, inline = T)
 # filter_checkbox("gear", "Gears", df, ~gear, inline = T)
 # filter_slider("hp", "Horsepower", df, ~hp, width = "100%")
-filter_select("make", "Make", df, ~make)
+# filter_select("make", "Make", df, ~make)
 ```
 
 Page 1

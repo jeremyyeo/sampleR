@@ -9,10 +9,9 @@
     <div class="mypanel"></div>
 
     <script>
-    $.getJSON('http://jeremyyeo.github.io/sampleR/print-json/dep.json', function(data) {
+    $.getJSON('http://jeremyyeo.github.io/sampleR/print-json/list.json', function(data) {
 
-        var text = `Process Name: ${data.name}<br>
-                    Dependencies: ${data.dependencies}`
+        var text = data 
         $(".mypanel").html(text);
     });
     </script>
