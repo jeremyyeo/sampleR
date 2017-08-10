@@ -11,13 +11,17 @@
     <script>
     $.getJSON('http://jeremyyeo.github.io/sampleR/print-json/list.json', function(data) {
 
-        var text = data 
+        var text = data
+        
+        $.each(text, function(index, value){
+            
+            alert(value); 
+            
+        }); 
         // $(".mypanel").html(text);
     });
 
-    $.each(text, function(index, value){
-       alert(value); 
-    });
+
     </script>
     
 </body>
