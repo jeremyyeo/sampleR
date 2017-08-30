@@ -27,8 +27,10 @@ EXCHANGE_RATES = {
 }
 
 # Print before converting rates.
+print('Printing report')
 pprint.pprint(REPORTS)
 
+print('\nUpdating report')
 for item in REPORTS:
     report_currency = item['report_currency']
     if item['required_currency'] in EXCHANGE_RATES[report_currency].keys():
@@ -40,4 +42,5 @@ for item in REPORTS:
 
 
 # Print after converting rates.
+print('\nPrinting updated report')
 pprint.pprint(REPORTS)
