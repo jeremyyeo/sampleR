@@ -50,3 +50,27 @@ function getFormattedUTCDate() {
   today = yyyy + "-" + mm + "-" + dd;
   return today;
 }
+
+// Recording Spreadsheet views as pageviews in Google Analytics.
+
+function GOOGLEANALYTICS(gaaccount) {
+    var spreadsheetName = SpreadsheetApp.getActiveSpreadsheet().getName();
+    var sheetName = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet().getName(); 
+
+    /** 
+    * Written by Amit Agarwal 
+    * Web: www.ctrlq.org 
+    * Email: amit@labnol.org 
+    */ 
+
+    // https://developers.google.com/analytics/devguides/collection/protocol/v1/reference
+    var imageURL = [
+      "//ssl.google-analytics.com/collect?v=1&t=pageview",
+      "&tid=" + gaaccount,
+      "&cid=" + Utilities.getUuid(),
+      "&z="   + Math.round(Date.now() / 1000).toString(),
+      "&dp="  + encodeURIComponent(spreadsheetName + " - " + sheetName)
+    ].join("");
+    
+    return imageURL;
+  }
