@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Google Sheets API Demo</title>
+    <meta charset='utf-8' />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <!--getmdl-select-->
+    <link rel="stylesheet" href="getmdl-select/getmdl-select.min.css">
+    <script defer src="getmdl-select/getmdl-select.min.js"></script>
+    <!--plotly.js-->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  </head>
+  <body>
+    <div class="mdl-layout mdl-js-layout">
+        <div class="mdl-grid">
+            <div class="mdl-layout-title">
+                <h4>Google Sheets API Demo</h4>
+            </div>
+        </div>
+        <main class="mdl-layout__content">
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--2-col">
+              <div class="mdl-grid">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
+                    <input type="text" value="" class="mdl-textfield__input" id="region" readonly>
+                    <input type="hidden" value="" name="region">
+                    <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+                    <label for="region" class="mdl-textfield__label">Region</label>
+                    <ul for="region" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                        <li class="mdl-menu__item" data-val="NZ" data-selected="true">NZ</li>
+                        <li class="mdl-menu__item" data-val="AU">AU</li>
+                        <li class="mdl-menu__item" data-val="UK">UK</li>
+                        <li class="mdl-menu__item" data-val="US">US</li>
+                    </ul>
+                </div>
+                <!--Add a field to get the ID of a google sheet-->
+                <!-- <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"> -->
+                  <!-- <input class="mdl-textfield__input" type="text" id="inputSheetsId" value="1rl4lCMZ7xfPUthbJIQp3_6vyKbjbcpg6b7paPcugW0o"> -->
+                  <!-- <label class="mdl-textfield__label" for="inputSheetsId">Google Sheets ID (See example below)</label> -->
+                  <!-- <span class="mdl-textfield__error">Input is not a number!</span> -->
+                <!-- </div>-->
+              </div>
+               <!-- <div class="mdl-grid"> -->
+                <!--Add a field to get the ID of a google sheet-->
+                <!-- <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"> -->
+                  <!-- <input class="mdl-textfield__input" type="text" id="inputSheetsRange" value="NZ!A:C"> -->
+                  <!-- <label class="mdl-textfield__label" for="inputSheetsRange">Sheet Range (See example below)</label> -->
+                  <!-- <span class="mdl-textfield__error">Input is not a number!</span> -->
+                <!-- </div>                -->
+              <!-- </div> -->
+              <div class="mdl-grid">
+                <!--Add buttons to initiate auth sequence and sign out-->
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" id="authorize-button" style="display: none;">Authorize</button>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" id="signout-button" style="display: none;">Sign Out</button>
+              </div>
+              <div class="mdl-grid">
+                <p id="content">Authorize to view the data.</p>
+                <p id="commentary" style="display:none;">
+                    The latest <strong>brand vibrancy score</strong> for <span id="region-name">unknown</span> is <span id="current-score">unknown</span>. 
+                    There has been a growth in the score of <span id="current-score-mom">unknown</span> month-on-month and <span id="current-score-yoy">unknown</span> year-on-year. 
+                    <br/>
+                    <br/>
+                    A score over 1 means that there were more searches for our brand than for our competitor while a score below 1 means the opposite. The score is calculated by dividing our brands trend value with the competitors trend value.
+                    <br/>
+                    <br/>
+                    The trend metric itself has been retrieved from Google Trends.
+                </p>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--10-col">
+              <!--Plot-->
+              <div id="score-plot" style="width:100%; height:40vh"></div>
+              <div id="trend-plot" style="width:100%; height:40vh"></div>
+            </div>
+          </div>
+        </main>
+    </div>
+    <script type="text/javascript" src="js/gs-loader.js"></script>
+    <script async defer src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};handleClientLoad()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+  </body>
+</html>
