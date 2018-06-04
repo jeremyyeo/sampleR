@@ -17,7 +17,7 @@
       </div>
   </div>
   <script>
-    d3.csv("src/data.csv", function(data) {
+    d3.json("src/data.json", function(data) {
       // sequential color scale on profit
       var min = d3.min(data, function (d) { return d.profit; });
       var max = d3.max(data, function (d) { return d.profit; });

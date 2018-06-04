@@ -8,7 +8,7 @@ deleted_flag    <- c(0, 1)
 tenure          <- 0:12
 profit          <- 10:30
 
-num  <- sample(c(100000:500000), 1)
+num  <- sample(c(100000:200000), 1)
 prob <- c(0.65, 0.25, 0.1)
 
 df <-
@@ -20,5 +20,7 @@ df <-
     deleted_flag    = sample(deleted_flag, num, replace = T),
     profit          = c(sample(profit, num, replace = T) * sample(tenure, num, replace = T))
   )
+# write.csv(df, file = "data.csv", row.names = F)
 
-write.csv(df, file = "data.csv", row.names = F)
+df <- jsonlite::toJSON(df)
+write(df, file = "data.json")
