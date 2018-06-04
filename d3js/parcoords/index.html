@@ -1,0 +1,64 @@
+<!doctype html>
+<head>
+  <title>Basic Parallel Coordinates Example</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
+  <script src="lib/d3.min.js"></script>
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+  <script src="lib/d3.parcoords.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/d3.parcoords.css">
+</head>
+<body>
+    <div class="content-grid mdl-grid">
+      <div class="mdl-cell mdl-cell--12-col">
+        <div id="example" class="parcoords" style="height: 80vh"></div>
+      </div>
+  </div>
+  <script>
+    d3.csv("src/data.csv", function(data) {
+      // sequential color scale on profit
+      var min = d3.min(data, function (d) { return d.profit; });
+      var max = d3.max(data, function (d) { return d.profit; });
+      var colorgen = d3.scale.linear().domain([min, max]).range(["blue", "red"]).interpolate(d3.interpolateLab);
+      var color = function(d) { return colorgen(d.profit); };
+      
+      // ordinal color scale on source
+      // var colorgen = d3.scale.ordinal().range(["red", "blue", "green", "orange"]);
+      // var color = function(d) { return colorgen(d.source); };
+
+      var dateParse = d3.time.format("%Y-%m-%d").parse;
+
+      data.forEach(function(d, i) {
+        d.milestone_month = dateParse(d.milestone_month);
+        d.activity_month = dateParse(d.activity_month);
+      });
+
+      var dims = {
+        "source": {type: "string"},
+        "milestone_month": {type: "date"},
+        "activity_month": {type: "date"},
+        "user_type": {type: "string"},
+        "profit": {type: "number"},
+        "deleted_flag": {tickValues: [0, 1]}
+      };
+
+      var parcoords = d3.parcoords()("#example")
+        .data(data)
+        .dimensions(dims)
+        // .hideAxis(["name"])
+        .color(color)
+        .alpha(0.2)
+        // .composite("darken")
+        .margin({ top: 20, left: 0, bottom: 20, right: 0 })
+        .mode("queue")
+        // .rate(30)
+        .render()
+        .reorderable()
+        .brushMode("1D-axes");  // enable brushing
+
+      parcoords.svg.selectAll("text").style("font", "20px Helvetica");
+    });
+  </script>
+</body>
