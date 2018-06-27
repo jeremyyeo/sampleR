@@ -21,7 +21,8 @@
       // sequential color scale on profit
       var min = d3.min(data, function (d) { return d.profit; });
       var max = d3.max(data, function (d) { return d.profit; });
-      var colorgen = d3.scale.linear().domain([min, max]).range(["blue", "red"]).interpolate(d3.interpolateLab);
+      var mean = d3.mean(data, function (d) { return d.profit; });
+      var colorgen = d3.scale.linear().domain([min, max]).range(["#2ECC40", "#FF4136"]).clamp(true).interpolate(d3.interpolateHcl);
       var color = function(d) { return colorgen(d.profit); };
       
       // ordinal color scale on source
@@ -49,11 +50,11 @@
         .dimensions(dims)
         // .hideAxis(["name"])
         .color(color)
-        .alpha(0.2)
-        // .composite("darken")
+        .alpha(1)
+        .composite("darken")
         .margin({ top: 20, left: 0, bottom: 20, right: 0 })
         .mode("queue")
-        // .rate(30)
+        .rate(30)
         .render()
         .reorderable()
         .brushMode("1D-axes");  // enable brushing
